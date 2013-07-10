@@ -1,4 +1,4 @@
-vsheetsNavigationGenerator
+sheetsNavigationGenerator
 =========================
 
 various sheet of google spreadsheet, it will generate a navigation information sheet to access from javascript.
