@@ -35,7 +35,6 @@ var MYAPP = {
         var data = response.getDataTable(),
             url, row, rowLength, key, keyStr, value, query;
             
-        console.log("spreadsheetHandleResponseDefault start");
         if (!data || response.isError()) {
             alert(response.getMessage() + ':' + response.getDetailedMessage());
             return;
@@ -46,7 +45,6 @@ var MYAPP = {
             value  = data.getFormattedValue(row, 1);
             MYAPP.navigationDict[keyStr] = value;
         }
-        console.log(this.spreadsheetInfoPageDict);
         
         // 指定したgoogleスプレッドシートを読み込む
         url = MYAPP._getSpreadsheetUrl(MYAPP.TARGET_SHEET_NAME);
@@ -54,7 +52,6 @@ var MYAPP = {
             query  = new google.visualization.Query(url);
             query.send(MYAPP.runTargetSheetCallback);
         }
-        console.log("spreadsheetHandleResponseDefault end");
     },
     
     /**--------------------------------------------

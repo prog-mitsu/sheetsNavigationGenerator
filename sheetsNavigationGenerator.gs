@@ -30,20 +30,12 @@ var spreadsheetWriteInfo = {
             sheetObj = null, range = null, 
             writeArray = [];
 
-        Logger.log("spreadsheetWriteInfo start");
-        Logger.log("spreadsheetId   = " + spreadsheetId);
-        Logger.log("spreadsheetURL  = " + spreadsheetURL);
-        Logger.log("spreadsheetName = " + spreadsheetName);
-        
         // 先頭には、このスプレッドシートにアクセスするためのkeyを書き込んでおきます
         writeArray.push(["key", spreadsheetId]);
         
         // 2列目以降には、各シートのシート名とポインタ情報を書き込みます
         for (i = 0, iLength = sheets.length; i < iLength; i+=1) {
             sheetObj = sheets[i];
-            Logger.log(sheetObj.getName());
-            Logger.log(sheetObj.getSheetId());
-            Logger.log(sheetObj.getIndex());
             writeArray.push([sheetObj.getName(), sheetObj.getSheetId()]);  // 名前とシートID(gid)のペアを出力
         }
 
@@ -52,7 +44,6 @@ var spreadsheetWriteInfo = {
         sheetObj.clear();
         range = sheetObj.getRange(WRITE_ROW_START_POS, WRITE_COL_START_POS, writeArray.length, writeArray[0].length);
         range.setValues(writeArray);
-        Logger.log("spreadsheetWriteInfo end"); 
     },
     
     /**
