@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+
+
+  <!-- ガジェット名 -->
+  <ModulePrefs title="myapp" />
+
+  <!-- ガジェットから渡すユーザーパラメータの定義 -->
+  <UserPref name="param00" datatype="string" default="9999" />
+  <UserPref name="param01" datatype="string" default="hoge" />
+
+  <Content type="html">
+    <![CDATA[
+        <script type="text/javascript" src='//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js '></script>
+        <script type="text/javascript" src='//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
+        <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/redmond/jquery-ui.css">
+        
+        <script type="text/javascript" src='//sites.google.com/site/qiitatestpublic20130710/jquery.jqGrid.src.js'></script>
+        <script type="text/javascript" src='//sites.google.com/site/qiitatestpublic20130710/grid.locale-ja.js'></script>
+        <link rel="stylesheet" type="text/css" href="//sites.google.com/site/qiitatestpublic20130710/ui.jqgrid.css">
+        
+        <!-- Google Visualization API用読込  -->
+        <script type="text/javascript" src="//www.google.com/jsapi"></script>
+        <script type="text/javascript">
+            google.load("visualization", "1");
+        </script>
+        
+        <!-- 自前コード -->
+        <script type="text/javascript" src='//sites.google.com/site/qiitatestpublic20130710/myapp.js'></script>
+    
+        <!-- 実行 -->
+        <script type="text/javascript">
+            $(document).ready(function(){
+                MYAPP.sendNavigationSheetCallback();
+            });
+        </script>
+        
+        <h2 class="ui-widget-header ui-corner-all">テスト</h2>
+        <br>
+        <a href="https://docs.google.com/spreadsheet/ccc?key=0AtO7xcerUfwVdGgxRE82M21WU05WZjQ4dWNoOW5wV0E#gid=0">対象スプレッドシートはこちら</a><br>
+        <br>
+        ↓「Navigation」シートから各シート情報を得た後、「表示したいシート」の内容が表示されます↓<br>
+        <table id="jqGridList"> </table>
+        
+    ]]>
+  </Content>
+</Module>
