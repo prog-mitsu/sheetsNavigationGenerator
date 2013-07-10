@@ -1,4 +1,4 @@
-sheetsNavigationGenerator
+vsheetsNavigationGenerator
 =========================
 
 various sheet of google spreadsheet, it will generate a navigation information sheet to access from javascript.
@@ -6,54 +6,52 @@ various sheet of google spreadsheet, it will generate a navigation information s
 # webからgoogleスプレッドシートの各種シートに自在にアクセスする
 
 ## はじめに
-webサイト側から、googleスプレッドシートの複数のシートにアクセスしたいニーズがあったとします。
-GASなら、以下のフローで済むと思います。
+webサイト側から、googleスプレッドシートの複数のシートにアクセスしたいニーズがあったとします。<br>
+GASなら、以下のフローで済むと思います。<br>
 
 + スプレッドシートオブジェクトにアクセス
 + 支配下のシート一覧を取得
 + それぞれ対象のシートにアクセス
 
-が、javascriptでアクセスする場合は…という事で、 Google Visualization API を試みました。
-URL決め打ちで「シート」にはアクセスできますが、「スプレッドシート」にアクセスする方法が見当たりませんでした。
-(スプレッドシート支配下のシート一覧が取れない。  取れるといいんだけど…)
+が、javascriptでアクセスする場合は…という事で、 Google Visualization API を試みました。<br>
+URL決め打ちで「シート」にはアクセスできますが、「スプレッドシート」にアクセスする方法が見当たりませんでした。<br>
+(スプレッドシート支配下のシート一覧が取れない。  取れるといいんだけど…)<br>
 
-スプレッドシート側が静的でシート名もシートURLも固定、という場合は困りませんが、
+スプレッドシート側が静的でシート名もシートURLも固定、という場合は困りませんが、<br>
 
 + webサイト側でシート一覧を表示したい
 + スプレッドシート側のシート数が増減したりして、シートのURLがしょっちゅう変わる
 + シートのURL決め打ちではなく、シート名からシートにアクセスしたい
 
-という場合などに困ってしまいます。
-
-結局、
+という場合などに困ってしまいます。<br>
+結局、<br>
 
 1. **GASでスプレッドシート側の先頭シートに、各種シートへのナビゲーション情報を出力する**<br>(このシートのURLは固定する)
 2. **JS側からはそのナビゲーションを参照 → 各種ページへのURLを取得してアクセスする…**
 
-という美しくない解法で実現しました。
+という美しくない解法で実現しました。<br>
 
-**ナビゲーション情報シートはこんなんです**
+**ナビゲーション情報シートはこんなんです**<br>
+
 ![2013-07-10_07h01_38.png](https://qiita-image-store.s3.amazonaws.com/0/9439/1b8537a7-6041-e018-ba96-1925f6d45c24.png)
 
-色々メンドウだったので、主に未来の自分に向けてメモを残しておきます。
-
-**※もっと簡単で良い方法があるはずです、だれか教えて下さい**
-javascript単体でスプレッドシート(シートではなく)情報に直にアクセスする手軽な方法あるのかな？
-
-全コード [github](https://github.com/prog-mitsu/sheetsNavigationGenerator)
-
-以下は概要メモですので、シートへのアクセス詳細などは  [参考サイト](#section1) をご参照下さい。
+色々メンドウだったので、主に未来の自分に向けてメモを残しておきます。<br>
+**※もっと簡単で良い方法があるはずです、だれか教えて下さい**<br>
+javascript単体でスプレッドシート(シートではなく)情報に直にアクセスする手軽な方法あるのかな？<br>
+<br>
+以下は概要メモですので、シートへのアクセス詳細などは  [参考サイト](#section1) をご参照下さい。<br>
+<br>
 
 ## 内容について
 
 ### google apps script(googleスプレッドシート側)
 
-各シート情報を集めて、先頭のシートに出力する処理を行います。
-実行しやすいように、シートのメニューに「sheetsNavigationGenerator」→「run」 を追加しています。
-
-** googleスプレッドシートの各種シートに、javascriptからアクセスするための**
-** ナビゲーション情報シートを生成します**
-
+各シート情報を集めて、先頭のシートに出力する処理を行います。<br>
+実行しやすいように、シートのメニューに「sheetsNavigationGenerator」→「run」 を追加しています。<br>
+<br>
+**googleスプレッドシートの各種シートに、javascriptからアクセスするための**<br>
+**ナビゲーション情報シートを生成します**<br>
+<br>
 ```js:sheetsNavigationGenerator.gs
 
 var spreadsheetWriteInfo = {
@@ -137,19 +135,20 @@ function onMenuRun() {
 ```
 
 #### 実行イメージ ####
+<br>
 ![2013-07-10_15h59_17.png](https://qiita-image-store.s3.amazonaws.com/0/9439/3b9f760f-633a-997d-97c4-a810d64360ef.png)
-
+<br>
 
 ### web(JavaScript)側
 
-Google Visualization APIでシート情報を取得しますが、
+Google Visualization APIでシート情報を取得しますが、<br>
 
 + 先頭シート(便宜上Navigationシートと呼びます)にアクセス
 + Navigationシートから、目的のシート名のgidを取得してurlを生成します
 + 生成したurlから対象シートにアクセスし、データを取得します
 
-こんなフローでデータ取得しています。
-以下、javascriptでシートの内容を取得して、jqGridで内容を表示するサンプルです。
+こんなフローでデータ取得しています。<br>
+以下、javascriptでシートの内容を取得して、jqGridで内容を表示するサンプルです。<br>
 
 ```js:myapp.js
 
@@ -290,15 +289,19 @@ var MYAPP = {
 ```
 
 ##動作サンプル
-[サンプルページ](https://sites.google.com/site/qiitatestpublic20130710/home/)を設置しました。
+<br>
+[サンプルページ](https://sites.google.com/site/qiitatestpublic20130710/home/)を設置しました。<br>
 
 ## 最後に
-全コードはこちらです [github](https://github.com/prog-mitsu/sheetsNavigationGenerator)
-スプレッドシート側のシートが増減しまくったりするケースで便利だと思います。
-また、JavaScript側に決め打ちのURLをベタベタ書かなくて良いので、そこそこデータドリブンです。
-(そもそも、JavaScript側からスプレッドシート情報取れればこんな回りくどいことしなくていいんだけど…)
-大事なので２度書きますが、**※もっと簡単で良い方法があるはずです、だれか教えて下さい**
+スプレッドシート側のシートが増減しまくったりするケースで便利だと思います。<br>
+また、JavaScript側に決め打ちのURLをベタベタ書かなくて良いので、そこそこデータドリブンです。<br>
+(そもそも、JavaScript側からスプレッドシート情報取れればこんな回りくどいことしなくていいんだけど…)<br>
+大事なので２度書きますが、<br>
+**※もっと簡単で良い方法があるはずです、だれか教えて下さい**
+<br>
 
 ## 参考サイト<a name="section1">  
 [Google Spreadsheets を簡易 SQL DB に！「Google Visualization API」 - WebOS Goodies ](http://webos-goodies.jp/archives/51310352.html)
+<br>
+
 
